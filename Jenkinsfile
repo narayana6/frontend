@@ -9,9 +9,9 @@ pipeline {
     }
     environment{
         def appVersion = '' //variable declaration
-        nexusUrl = 'nexus.daws78s.online:8081'
+        nexusUrl = 'nexus.bnsaws.online:8081'
         region = "us-east-1"
-        account_id = "315069654700"
+        account_id = "655431895664"
     }
     stages {
         stage('read the version'){
@@ -51,7 +51,8 @@ pipeline {
                     aws eks update-kubeconfig --region us-east-1 --name expense-dev
                     cd helm
                     sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
-                    helm upgrade frontend .
+                    helm install frontend .
+                    #helm upgrade frontend .
                 """
             }
         }
